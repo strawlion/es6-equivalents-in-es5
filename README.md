@@ -27,25 +27,15 @@
 An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value. Arrow functions are always anonymous.
 
 
-ES6:
-
 ```js
 [1, 2, 3].map(n => n * 2);
 // -> [ 2, 4, 6 ]
 ```
 
-ES5 equivalent:
-
-```js
-[1, 2, 3].map(function(n) { return n * 2; }, this);
-// -> [ 2, 4, 6 ]
-```
 
 ## Block Scoping Functions
 
 Block scoped bindings provide scopes other than the function and top level scope. This ensures your variables don't leak out of the scope they're defined:
-
-ES6:
 
 ```js
 // let declares a block scope local variable,
@@ -66,15 +56,14 @@ console.log(a); // 5
 console.log(b); // 1
 ```
 
-ES6:
-
 ```js
 // const creates a read-only named constant in ES6.
 const myFavoriteNumber = 7;
 
 try {
   myFavoriteNumber = 15;
-} catch (err) {
+} 
+catch (err) {
   console.log('my favorite number is still: ' + myFavoriteNumber);
   // will still print 7
 }
@@ -83,8 +72,6 @@ try {
 ## Template Literals
 
 ES6 Template Literals are strings that can include <strong>embedded expressions</strong>. This is sometimes referred to as string interpolation.
-
-ES6:
 
 ```js
 // Basic usage with an expression placeholder
@@ -113,8 +100,6 @@ console.log(`foo ${ getResult() } bar`);
 
 Computed property names allow you to specify properties in object literals based on expressions:
 
-ES6:
-
 ```js
 var prefix = 'foo';
 var myObject = {
@@ -122,17 +107,13 @@ var myObject = {
   [prefix + 'baz']: 'world'
 };
 
-console.log(myObject['foobar']);
-// -> hello
-console.log(myObject['foobaz']);
-// -> world
+console.log(myObject['foobar']); // -> hello
+console.log(myObject['foobaz']); // -> world
 ```
 
 ## Destructuring Assignment
 
 The destructuring assignment syntax is a JavaScript expression that makes it possible to extract data from arrays or objects using a syntax that mirrors the construction of array and object literals.
-
-ES6:
 
 ```js
 var { foo, bar } = { foo: 'lorem', bar: 'ipsum' };
@@ -140,40 +121,30 @@ console.log(foo); // -> lorem
 console.log(bar); // -> ipsum
 ```
 
-ES6:
-
 ```js
-var [a, , b] = [1, 2, 3];
+var [a, b] = [1, 2, 3];
 console.log(a) // -> 1
-console.log(b) // -> 3
+console.log(b) // -> 2
 ```
 
 ## Default Parameters
 
 Default parameters allow your functions to have optional arguments without needing to check arguments.length or check for undefined.
 
-ES6:
-
 ```js
 function greet(message='hello', name='world') {
   console.log(message, name);
 }
 
-greet();
-// -> hello world
-greet('hey');
-// -> hey world
+greet();      // -> hello world
+greet('hey'); // -> hey world
 ```
 
 ## Classes
 
-This implements class syntax and semantics as described in the ES6 draft spec. Classes are a great way to reuse code.
-Several JS libraries provide classes and inheritance, but they aren't mutually compatible.
-
-ES6:
-
 ```js
 class Hello {
+  
   constructor(name) {
     this.name = name;
   }
@@ -205,14 +176,14 @@ Modules try to solve many issues in dependencies and deployment, allowing users 
 *Assumes an environment using CommonJS*
 
 
-app.js - ES6
+app.js
 
 ```js
 import * as math from 'lib/math';
 console.log('2π = ' + math.sum(math.pi, math.pi));
 ```
 
-lib/math.js - ES6
+lib/math.js
 
 ```js
 export {
@@ -230,8 +201,6 @@ function sum(x, y) {
 
 Method syntax is supported in object initializers, for example see toString():
 
-ES6:
-
 ```js
 var object = {
   value: 42,
@@ -247,8 +216,6 @@ console.log(object.toString() === 42); // -> true
 
 This allows you to skip repeating yourself when the property name and property value are the same in an object literal.
 
-ES6:
-
 ```js
 var x = 1;
 var y = 10;
@@ -263,8 +230,6 @@ console.log(point.y) // -> 10
 Rest parameters allows your functions to have variable number of arguments without using the arguments object.
 The rest parameter is an instance of Array so all the array methods just work.
 
-ES6:
-
 ```js
 function sum(...values) {
   return values.reduce((sum, value) => sum + value, 0);
@@ -277,8 +242,6 @@ console.log(sum(1, 2, 3)); // -> 6
 
 The spread operator is like the reverse of rest parameters. It allows you to expand an array into multiple formal parameters.
 
-ES6:
-
 ```js
 function add(a, b) {
   return a + b;
@@ -289,17 +252,20 @@ let values = [1, 2];
 console.log(add(...values)); // -> 3
 ```
 
-## About
+## Asynchronous Control Flow
 
-Inspired by:
+The `async` and `await` keywords allow writing asynchronous code in a lexically synchronous way. The return value of an `async` function is implicitly wrapped in a promise. Conversely, the `await` keyword will suspend execution of the rest of the function until the supplied promise has been resolved or rejected and then implicitly unwraps the supplied promise.
 
-* [ES6 Feature Proposals](http://tc39wiki.calculist.org/es6/)
-* [ES6 Features](https://github.com/lukehoban/es6features)
-* [ECMAScript 6 support in Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)
-* [Babel](https://babeljs.io)
-* [JS Rocks](http://jsrocks.org/)
-
-
-## License
-
-This work is licensed under a [Creative Commons Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/) License.
+```js
+async function getStockData(symbol) {
+  
+  try {
+    let quote = await getQuote(symbol);
+    return formatQuote(quote);
+  } 
+  catch (error) {
+    addTextToPage("Argh, broken: " + error.message);
+  }
+  
+}
+```
