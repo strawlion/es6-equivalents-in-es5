@@ -5,12 +5,12 @@
 **Table of contents:**
 
 1. [Arrow Functions](#arrow-functions)
+1. [Asynchronous Control Flow](#asynchronous-control-flow)
 1. [Block Scoping Functions](#block-scoping-functions)
 1. [Template Literals](#template-literals)
 1. [Computed Property Names](#computed-property-names)
 1. [Destructuring Assignment](#destructuring-assignment)
 1. [Default Parameters](#default-parameters)
-1. [Iterators and For-Of](#iterators-and-for-of)
 1. [Classes](#classes)
 1. [Modules](#modules)
 1. [Numeric Literals](#numeric-literals)
@@ -32,6 +32,33 @@ An arrow function expression (also known as fat arrow function) has a shorter sy
 // -> [ 2, 4, 6 ]
 ```
 
+## Asynchronous Control Flow
+
+The `async` and `await` keywords allow writing asynchronous code in a lexically synchronous way. The return value of an `async` function is implicitly wrapped in a promise. Conversely, the `await` keyword will suspend execution of the rest of the function until the supplied promise has been resolved or rejected and then implicitly unwraps the supplied promise.
+
+```js
+async function getStockData(symbol) {
+  
+  try {
+    let quote = await fetchQuote(symbol);
+    return formatQuote(quote);
+  } 
+  catch (error) {
+    log(`Request failed: ${ error.message }`);
+  }
+  
+}
+```
+```js
+async function getMultipleAsyncValues(symbol) {
+  let [foo, bar] = await Promise.all([
+                          fetch('foo.json'),
+                          fetch('bar.json')
+                      ]);
+  
+  return { foo, bar };
+}
+```
 
 ## Block Scoping Functions
 
@@ -250,22 +277,4 @@ function add(a, b) {
 let values = [1, 2];
 
 console.log(add(...values)); // -> 3
-```
-
-## Asynchronous Control Flow
-
-The `async` and `await` keywords allow writing asynchronous code in a lexically synchronous way. The return value of an `async` function is implicitly wrapped in a promise. Conversely, the `await` keyword will suspend execution of the rest of the function until the supplied promise has been resolved or rejected and then implicitly unwraps the supplied promise.
-
-```js
-async function getStockData(symbol) {
-  
-  try {
-    let quote = await getQuote(symbol);
-    return formatQuote(quote);
-  } 
-  catch (error) {
-    addTextToPage("Argh, broken: " + error.message);
-  }
-  
-}
 ```
