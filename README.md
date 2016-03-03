@@ -34,13 +34,15 @@ An arrow function expression (also known as fat arrow function) has a shorter sy
 
 ## Asynchronous Control Flow
 
-The `async` and `await` keywords allow writing asynchronous code in a lexically synchronous way. The return value of an `async` function is implicitly wrapped in a promise. Conversely, the `await` keyword will suspend execution of the rest of the function until the supplied promise has been resolved or rejected and then implicitly unwraps the supplied promise.
+The `async` and `await` keywords allow writing asynchronous code in a lexically synchronous way. The return value of an `async` function is implicitly wrapped in a promise. Conversely, the `await` keyword will suspend execution of the function until the supplied promise has been resolved or rejected and then implicitly unwraps the supplied promise.
 
 ```js
-async function getStockData(symbol) {
+let appleQuote = await getStockQuote('AAPL');
+
+async function getStockQuote(symbol) {
   
   try {
-    let quote = await fetchQuote(symbol);
+    let quote = await fetchData(symbol);
     return formatQuote(quote);
   } 
   catch (error) {
@@ -50,7 +52,7 @@ async function getStockData(symbol) {
 }
 ```
 ```js
-async function getMultipleAsyncValues(symbol) {
+async function getMultipleAsyncValues() {
   let [foo, bar] = await Promise.all([
                           fetch('foo.json'),
                           fetch('bar.json')
@@ -58,6 +60,7 @@ async function getMultipleAsyncValues(symbol) {
   
   return { foo, bar };
 }
+
 ```
 
 ## Block Scoping Functions
