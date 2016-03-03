@@ -18,9 +18,6 @@
 1. [Object Initializer Shorthand](#object-initializer-shorthand)
 1. [Rest Parameters](#rest-parameters)
 1. [Spread Operator](#spread-operator)
-1. [Proxying a function object](#proxying-a-function-object)
-1. [About](#about)
-1. [License](#license)
 
 ## Arrow Functions
 
