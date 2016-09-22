@@ -1,7 +1,5 @@
 # <img src="http://i.imgur.com/yy1sACZ.png" width="100px"> ECMAScript 6 equivalents in ES5
 
-*Please note this document is very much a work in progress. Contributions are welcome.*
-
 **Table of contents:**
 
 1. [Arrow Functions](#arrow-functions)
@@ -21,7 +19,7 @@
 
 ## Arrow Functions
 
-An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value. Arrow functions are always anonymous.
+An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and uses a lexical `this`. Arrow functions are always anonymous.
 
 
 ```js
@@ -199,8 +197,6 @@ console.log(Hello.sayHelloAll()); // -> Hello everyone!
 ## Modules
 
 Modules try to solve many issues in dependencies and deployment, allowing users to create modules with explicit exports, import specific exported names from those modules, and keep these names separate.
-
-*Assumes an environment using CommonJS*
 
 
 app.js
